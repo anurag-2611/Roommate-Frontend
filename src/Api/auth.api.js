@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api", // apna backend url
+  baseURL: "https://roommate-backend.vercel.app/api", // apna backend url
   withCredentials: true,
 });
 
