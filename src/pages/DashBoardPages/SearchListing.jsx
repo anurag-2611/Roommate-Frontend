@@ -27,7 +27,7 @@ export const SearchListing = () => {
     const FeatchedRoom = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/room/get-rooms");
+        const res = await axios.get("/api/room/get-rooms");
 
         setData(res.data.data);
         setFilteredData(res.data.data);
@@ -45,7 +45,7 @@ export const SearchListing = () => {
     const getFavorites = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/user/get-favorites",
+          "/api/user/get-favorites",
           {
             withCredentials: true,
             headers: {

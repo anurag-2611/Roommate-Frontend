@@ -420,23 +420,6 @@ export const AddListing = () => {
                 } finally {
                   setLoading(false); 
                   setStep(1); 
-                  // setFormData({
-                  //   title: "",
-                  //   address: "",
-                  //   description: "",
-                  //   type: "",
-                  //   roomAvailable: "",
-                  //   bathrooms: "",
-                  //   rent: "",
-                  //   nearestCity: "",
-                  //   connectivity: "",
-                  //   phoneNumber: "",
-                  //   email: "",
-                  //   photos: [],
-                  //   videos: [],
-                  //   thumbnail: null,
-                  //   rentalTerms: "",
-                  // });
                 }
               }}
               className="space-y-4 sm:space-y-6 md:space-y-8"

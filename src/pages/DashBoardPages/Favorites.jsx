@@ -41,7 +41,7 @@ export const Favorites = () => {
     try {
       if (favoriteListings.some((item) => item._id === id)) {
         const response = await axios.delete(
-          `http://localhost:5000/api/user/remove-favorite/${id}`,
+          `/api/user/remove-favorite/${id}`,
           {
             withCredentials: true,
             headers: {

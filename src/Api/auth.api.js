@@ -1,12 +1,7 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "https://roommate-backend.vercel.app/api", // apna backend url
-  withCredentials: true,
-});
-
 const registerUser = async (userData) => {
-  const response = await api.post("/user/register", userData);
+  const response = await axios.post("/api/user/register", userData);
   return response.data;
 };
 

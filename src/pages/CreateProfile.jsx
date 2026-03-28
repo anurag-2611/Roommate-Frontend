@@ -3,8 +3,6 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
 
 export const CreateProfile = () => {
   const token = localStorage.getItem("accessToken");
@@ -94,7 +92,7 @@ export const CreateProfile = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/user/userprofile",
+        "/api/user/userprofile",
         formDataToSend,
         {
           withCredentials: true,
@@ -103,8 +101,6 @@ export const CreateProfile = () => {
           },
         }
       );
-
-      console.log(response.data);
 
       showSuccessToast(response?.data?.message);
 

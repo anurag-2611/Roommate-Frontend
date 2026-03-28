@@ -23,7 +23,7 @@ export const ConversationPage = () => {
         const token = localStorage.getItem("accessToken");
 
         const response = await axios.get(
-          `http://localhost:5000/api/message/${friendId}`,
+          `/api/message/${friendId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const ConversationPage = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        "http://localhost:5000/api/message/send",
+        "/api/message/send",
         {
           receiverId: friendId,
           text: message,

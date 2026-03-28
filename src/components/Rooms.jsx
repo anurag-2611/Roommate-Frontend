@@ -15,7 +15,7 @@ export const Rooms = () => {
         setLoading(true);
 
         const response = await axios.get(
-          "http://localhost:5000/api/room/get-rooms",
+          "/api/room/get-rooms",
         );
 
         setData(response.data.data);

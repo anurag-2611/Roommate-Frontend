@@ -15,7 +15,7 @@ export const Profile = () => {
   const sendFriendRequest = async (profileId) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/friend/send-request/${profileId}`,
+        `/api/friend/send-request/${profileId}`,
         {},
         {
           withCredentials: true,

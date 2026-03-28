@@ -39,7 +39,7 @@ export const Home = () => {
   const fetchRooms = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/room/get-rooms");
+      const res = await axios.get("/api/room/get-rooms");
 
       setData(res.data.data);
       return res.data.data;
@@ -79,14 +79,6 @@ export const Home = () => {
     setType("");
     setFilteredData(data);
   };
-
-  const RoomImg = [
-    "https://images.jdmagicbox.com/v2/comp/bangalore/g2/080pxx80.xx80.200104135109.k2g2/catalogue/srm-pg-chamarajpet-bangalore-paying-guest-accommodations-for-men-qjfakk97b8.jpg",
-    "https://websiteupload.s3.ap-south-1.amazonaws.com/media/2024/07/66115bc1d6be29.webp",
-    "https://kripalhomes.com/wp-content/uploads/2023/02/WhatsApp-Image-2020-07-31-at-12.02.36-PM-3-e1625383337516.jpeg",
-    "https://gsh-cdn.sgp1.cdn.digitaloceanspaces.com/assets/img/no-broker-indore/PRT836/room-on-rent-in-indore/pg-in-new-gayatri-nagar_1713338684.jpg",
-    "https://websiteupload.s3.ap-south-1.amazonaws.com/media/2024/07/6617bb86d89551.webp",
-  ];
 
   const faqs = [
     {

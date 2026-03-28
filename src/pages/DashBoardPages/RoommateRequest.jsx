@@ -67,7 +67,7 @@ export const RoommateRequest = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        `http://localhost:5000/api/friend/reject-request/${senderProfileId}`,
+        `/api/friend/reject-request/${senderProfileId}`,
         {},
         {
           withCredentials: true,

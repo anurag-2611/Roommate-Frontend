@@ -17,7 +17,7 @@ export const ProfileProvider = ({ children }) => {
   const getProfile = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/user/get-profile",
+        "/api/user/get-profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const ProfileProvider = ({ children }) => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/user/get-users",
+        "/api/user/get-users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ export const ProfileProvider = ({ children }) => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "http://localhost:5000/api/friend/my-friends-data",
+        "/api/friend/my-friends-data",
         {
           withCredentials: true,
           headers: {
