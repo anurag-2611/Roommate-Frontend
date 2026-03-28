@@ -5,7 +5,7 @@ import { Rooms } from "../components/Rooms";
 import { Footer } from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import roommateImage from "../assets/Room-mate handshake.png";
+import roommateImage from "/Room-mate handshake.png";
 import { useContext } from "react";
 import { AuthContext } from "../context/AnthContext";
 import { useNavigate } from "react-router-dom";

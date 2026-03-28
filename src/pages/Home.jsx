@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Images } from "../components/Images";
 import { Rooms } from "../components/Rooms";
-import roommateImage from "../assets/Room-mate handshake.png";
+import roommateImage from "/Room-mate handshake.png";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Cities } from "../components/Cities";
