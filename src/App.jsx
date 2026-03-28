@@ -26,7 +26,7 @@ import { NotFound } from "./pages/NotFound";
 
 export const App = () => {
   return (
-    <div className="bg w-full h-full text-white flex  items-start">
+    <div  className="bg w-full h-full text-white flex  items-start">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
