@@ -47,8 +47,11 @@ export const Login = () => {
       toast.success("Login successful 🎉", {
         position: "top-center",
         autoClose: 2000,
-        onClose: () => navigate("/dashboard"),
       });
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
 
       reset();
     } catch (error) {
