@@ -241,11 +241,11 @@ export const Home = () => {
       },
     });
 
-    tl.from(FeatureRooms.current.children, {
-      y: 50,
+    tl.from(FeatureRooms.current, {
+      y: 100,
       opacity: 0,
       stagger: 0.15,
-      ease: "none",
+      ease: "power2.out",
     });
 
     tl.from(FaqRef.current, {
