@@ -154,7 +154,10 @@ export const Messages = () => {
                           <button
                             onClick={(e) => handleRemoveFriend(e, friend._id)}
                             disabled={removeLoading === friend._id}
-                            className="mt-4 w-full px-1 ml-13 sm:ml-4 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white py-2 sm:py-1.5 rounded-full text-[10px] font-medium transition"
+                            className="mt-4 w-full sm:w-auto px-4 py-2 sm:py-1.5 
+             bg-red-500 hover:bg-red-600 disabled:bg-red-300 
+             text-white rounded-full text-sm sm:text-xs 
+             font-medium transition flex items-center justify-center"
                           >
                             {removeLoading === friend._id
                               ? "Removing..."
