@@ -47,25 +47,13 @@ export const Register = () => {
 
       if (result.statusCode >= 400) {
         toast.error("User already registered", {
-          position: window.innerWidth < 600 ? "top-center" : "top-center", // Responsive position
-          autoClose: 1200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          className: "custom-toast-success", // For styling the container
-          bodyClassName: "custom-toast-body", // For styling the text
+        position: "top-center",
+        autoClose: 2000,
         });
       } else {
         toast.success(result.message, {
-          position: window.innerWidth < 600 ? "top-center" : "top-center", // Responsive position
-          autoClose: 1200,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          className: "custom-toast-success", // For styling the container
-          bodyClassName: "custom-toast-body", // For styling the text
+        position: "top-center",
+        autoClose: 2000,
         });
 
         reset();
@@ -76,14 +64,8 @@ export const Register = () => {
       }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong", {
-        position: window.innerWidth < 600 ? "top-center" : "top-center", // Responsive position
-        autoClose: 1200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        className: "custom-toast-success", // For styling the container
-        bodyClassName: "custom-toast-body", // For styling the text
+        position: "top-center",
+        autoClose: 2000,
       });
     }
   };

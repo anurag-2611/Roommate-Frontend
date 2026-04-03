@@ -45,14 +45,8 @@ export const Login = () => {
       localStorage.setItem("accessToken", response.data.accessToken);
 
       toast.success("Login successful 🎉", {
-        position: window.innerWidth < 600 ? "top-center" : "top-center", // Responsive position
-        autoClose: 1200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        className: "custom-toast-success", // For styling the container
-        bodyClassName: "custom-toast-body", // For styling the text
+        position: "top-center",
+        autoClose: 2000,
         onClose: () => navigate("/dashboard"),
       });
 
