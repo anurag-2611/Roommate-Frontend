@@ -121,7 +121,7 @@ export const RoomDetails = () => {
     const fetchRoom = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/room/rooms/${id}`,
+          `https://roommate-backend-1.onrender.com/api/room/rooms/${id}`,
         );
         setRoom(res.data.data);
       } catch (error) {

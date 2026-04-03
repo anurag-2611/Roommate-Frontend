@@ -392,7 +392,7 @@ export const AddListing = () => {
                   setLoading(true); // start loading
 
                   const response = await axios.post(
-                    "/api/room/add-room",
+                    "https://roommate-backend-1.onrender.com/api/room/add-room",
                     sendData,
                     // {
                     //   headers: {

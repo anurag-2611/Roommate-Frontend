@@ -15,7 +15,7 @@ export const Rooms = () => {
         setLoading(true);
 
         const response = await axios.get(
-          "/api/room/get-rooms",
+          "https://roommate-backend-1.onrender.com/api/room/get-rooms",
         );
 
         setData(response.data.data);

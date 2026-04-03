@@ -15,7 +15,7 @@ export const RoommateRequest = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "http://localhost:5000/api/friend/my-friends-data",
+        "https://roommate-backend-1.onrender.com/api/friend/my-friends-data",
         {
           withCredentials: true,
           headers: {
@@ -45,7 +45,7 @@ export const RoommateRequest = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        `http://localhost:5000/api/friend/accept-request/${senderProfileId}`,
+        `https://roommate-backend-1.onrender.com/api/friend/accept-request/${senderProfileId}`,
         {},
         {
           withCredentials: true,
@@ -67,7 +67,7 @@ export const RoommateRequest = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        `/api/friend/reject-request/${senderProfileId}`,
+        `https://roommate-backend-1.onrender.com/api/friend/reject-request/${senderProfileId}`,
         {},
         {
           withCredentials: true,

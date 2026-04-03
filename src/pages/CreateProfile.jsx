@@ -92,7 +92,7 @@ export const CreateProfile = () => {
       }
 
       const response = await axios.post(
-        "/api/user/userprofile",
+        "https://roommate-backend-1.onrender.com/api/user/userprofile",
         formDataToSend,
         {
           withCredentials: true,

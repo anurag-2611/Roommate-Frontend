@@ -15,7 +15,7 @@ export const Profile = () => {
   const sendFriendRequest = async (profileId) => {
     try {
       const response = await axios.post(
-        `/api/friend/send-request/${profileId}`,
+        `https://roommate-backend-1.onrender.com/api/user/my-listings/api/friend/send-request/${profileId}`,
         {},
         {
           withCredentials: true,

@@ -17,7 +17,7 @@ export const MyListing = () => {
         const token = localStorage.getItem("accessToken");
 
         const response = await axios.get(
-          "http://localhost:5000/api/user/my-listings",
+          "https://roommate-backend-1.onrender.com/api/user/my-listings",
           {
             withCredentials: true,
             headers: {

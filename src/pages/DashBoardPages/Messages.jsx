@@ -18,7 +18,7 @@ export const Messages = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "/api/friend/my-friends-data",
+        "https://roommate-backend-1.onrender.com/api/friend/my-friends-data",
         {
           withCredentials: true,
           headers: {
@@ -50,7 +50,7 @@ export const Messages = () => {
       const token = localStorage.getItem("accessToken");
 
       await axios.delete(
-        `/api/friend/remove-friend/${friendId}`,
+        `https://roommate-backend-1.onrender.com/api/friend/remove-friend/${friendId}`,
         {
           withCredentials: true,
           headers: {

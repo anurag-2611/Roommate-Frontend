@@ -17,7 +17,7 @@ export const ProfileProvider = ({ children }) => {
   const getProfile = async () => {
     try {
       const response = await axios.get(
-        "/api/user/get-profile",
+        "https://roommate-backend-1.onrender.com/api/user/get-profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export const ProfileProvider = ({ children }) => {
   const getUsers = async () => {
     try {
       const response = await axios.get(
-        "/api/user/get-users",
+        "https://roommate-backend-1.onrender.com/api/user/get-users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ export const ProfileProvider = ({ children }) => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.get(
-        "/api/friend/my-friends-data",
+        "https://roommate-backend-1.onrender.com/api/friend/my-friends-data",
         {
           withCredentials: true,
           headers: {

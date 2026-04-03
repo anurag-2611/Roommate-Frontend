@@ -23,7 +23,7 @@ export const ConversationPage = () => {
         const token = localStorage.getItem("accessToken");
 
         const response = await axios.get(
-          `/api/message/${friendId}`,
+          `https://roommate-backend-1.onrender.com/api/message/${friendId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const ConversationPage = () => {
       const token = localStorage.getItem("accessToken");
 
       const response = await axios.post(
-        "/api/message/send",
+        "https://roommate-backend-1.onrender.com/api/message/send",
         {
           receiverId: friendId,
           text: message,

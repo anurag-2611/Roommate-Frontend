@@ -20,7 +20,7 @@ export const Favorites = () => {
         if (!token) return;
 
         const res = await axios.get(
-          "http://localhost:5000/api/user/favorites",
+          "https://roommate-backend-1.onrender.com/api/user/favorites",
           {
             withCredentials: true,
             headers: {
@@ -41,7 +41,7 @@ export const Favorites = () => {
     try {
       if (favoriteListings.some((item) => item._id === id)) {
         const response = await axios.delete(
-          `/api/user/remove-favorite/${id}`,
+          `https://roommate-backend-1.onrender.com/api/user/remove-favorite/${id}`,
           {
             withCredentials: true,
             headers: {

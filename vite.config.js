@@ -7,10 +7,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://roommate-backend-1.onrender.com",
-        changeOrigin: true,
-      },
+      // "/api": {
+      //   target: "https://roommate-backend-1.onrender.com",
+      //   changeOrigin: true,
+      // },
     },
   },
 });
