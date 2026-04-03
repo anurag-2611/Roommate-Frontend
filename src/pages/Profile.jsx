@@ -89,7 +89,7 @@ export const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen w-[80%] bg-transparent m-auto p-10">
+    <div className="min-h-screen w-full sm:w-[90%] lg:w-[80%] bg-transparent m-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-10">
       {/* Profile Popup */}
       {showProfile && (
         <div
@@ -129,8 +129,8 @@ export const Profile = () => {
       )}
 
       {/* Navbar */}
-      <div className="py-0.5 px-10 w-[75%] flex justify-between items-center text-black rounded-full fixed z-10 top-4 left-1/2 transform -translate-x-1/2 shadow-lg bg-white/15 backdrop-blur-lg border border-white/10">
-        <div className="w-33 flex justify-center items-center">
+      <div className="py-1 px-4 sm:px-6 md:px-10 w-[95%] sm:w-[90%] lg:w-[75%] flex justify-between items-center text-black rounded-full fixed z-10 top-4 left-1/2 transform -translate-x-1/2 shadow-lg bg-white/15 backdrop-blur-lg border border-white/10">
+        <div className="w-24 sm:w-28 md:w-33 flex justify-center items-center">
           <div>
             <img
               onClick={() => setShowProfile(true)}
@@ -142,7 +142,7 @@ export const Profile = () => {
         </div>
 
         <div
-          className="w-12 h-12 rounded-full overflow-hidden border-2 border-white cursor-pointer"
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white cursor-pointer"
           onClick={() => setShowProfile(true)}
         >
           <img
@@ -154,48 +154,48 @@ export const Profile = () => {
       </div>
 
       {/* Profiles Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-[28%] sm:mt-[8%] gap-10 wrap-break-word">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-28 sm:mt-32 lg:mt-24 gap-10 wrap-break-words justify-items-center">
         {Users
-        .filter((user) => user._id !== profile?._id)
-        .map((user) => (
-          <div
-            key={user._id}
-            className="relative group w-70 h-70 rounded-3xl p-6 flex flex-col items-center bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg -mt-14 bg-white z-10">
-              <img
-                src={user.avatar}
-                alt="profile"
-                className="w-full h-full object-cover"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.src = "/fallback.webp";
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col items-center flex-1 text-center mt-5 z-10">
-              <h2 className="text-lg font-semibold text-gray-900">
-                {user.fullName}
-              </h2>
-
-              <p className="text-sm text-purple-600 font-medium">
-                @{user.userName}
-              </p>
-
-              <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-                {user.bio || "No bio available"}
-              </p>
-            </div>
-
-            <button
-              onClick={() => sendFriendRequest(user._id)}
-              className="z-10 mt-auto w-full py-2 rounded-xl font-medium bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all"
+          .filter((user) => user._id !== profile?._id)
+          .map((user) => (
+            <div
+              key={user._id}
+              className="relative group w-full max-w-70 min-h-70 rounded-3xl p-6 flex flex-col items-center bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
             >
-              Send Request
-            </button>
-          </div>
-        ))}
+              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg -mt-14 bg-white z-10">
+                <img
+                  src={user.avatar}
+                  alt="profile"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.src = "/fallback.webp";
+                  }}
+                />
+              </div>
+
+              <div className="flex flex-col items-center flex-1 text-center mt-5 z-10">
+                <h2 className="text-lg font-semibold text-gray-900">
+                  {user.fullName}
+                </h2>
+
+                <p className="text-sm text-purple-600 font-medium">
+                  @{user.userName}
+                </p>
+
+                <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+                  {user.bio || "No bio available"}
+                </p>
+              </div>
+
+              <button
+                onClick={() => sendFriendRequest(user._id)}
+                className="z-10 mt-auto w-full py-2 rounded-xl font-medium bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all"
+              >
+                Send Request
+              </button>
+            </div>
+          ))}
       </div>
     </div>
   );
