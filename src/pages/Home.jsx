@@ -39,7 +39,7 @@ export const Home = () => {
   const fetchRooms = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/room/get-rooms");
+      const res = await axios.get("https://roommate-backend-1.onrender.com/api/room/get-rooms");
 
       setData(res.data.data);
       return res.data.data;
