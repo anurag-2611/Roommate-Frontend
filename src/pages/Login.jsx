@@ -125,7 +125,18 @@ export const Login = () => {
           </Link>
         </p>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ top: "1rem" }} // prevents clipping on mobile
+        toastStyle={{ fontSize: "14px", maxWidth: "90vw" }} // responsive width
+      />
     </div>
   );
 };
