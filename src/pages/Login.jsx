@@ -65,6 +65,18 @@ export const Login = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Header />
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ zIndex: 9 }}
+      />
       <div className="bg-transparent p-10 flex flex-col items-center text-white border-2 border-black rounded-lg login-form w-[94%] sm:w-96">
         <h1 className="text-3xl text-black font-bold">Login</h1>
 
@@ -125,18 +137,6 @@ export const Login = () => {
           </Link>
         </p>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        style={{ top: "1rem" }} // prevents clipping on mobile
-        toastStyle={{ fontSize: "14px", maxWidth: "90vw" }} // responsive width
-      />
     </div>
   );
 };
