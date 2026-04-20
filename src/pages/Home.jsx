@@ -8,12 +8,7 @@ import { Cities } from "../components/Cities";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Home as HomeIcon,
-  Users,
-  MapPin,
-  Search,
-} from "lucide-react";
+import { Home as HomeIcon, Users, MapPin, Search } from "lucide-react";
 import axios from "axios";
 
 export const Home = () => {
@@ -36,7 +31,9 @@ export const Home = () => {
   const fetchRooms = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://roommate-backend-1.onrender.com/api/room/get-rooms");
+      const res = await axios.get(
+        "https://roommate-backend-1.onrender.com/api/room/get-rooms",
+      );
 
       setData(res.data.data);
       return res.data.data;
@@ -455,7 +452,11 @@ export const Home = () => {
 
         {/* Listings Grid */}
         {Loading ? (
-          <p>Loading....</p>
+          <div class="animate-pulse space-y-4 p-4 max-w-sm mx-auto">
+            <div class="h-6 bg-gray-300 rounded w-3/4"></div>
+            <div class="h-6 bg-gray-300 rounded w-full"></div>
+            <div class="h-6 bg-gray-300 rounded w-5/6"></div>
+          </div>
         ) : (
           <div
             ref={SearchItems}
