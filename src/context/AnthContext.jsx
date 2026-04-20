@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const register = async (data) => {
     const response = await registerUser(data);
 
-    console.log(response);
     return response;
   };
 
@@ -20,7 +19,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("accessToken", response.data.accessToken);
     }
 
-    console.log(response);
     return response;
   };
 
@@ -37,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     const response = await getCurrentUser();
     setUser(response?.data || null);
 
-    console.log(response);
     return response;
   };
 
