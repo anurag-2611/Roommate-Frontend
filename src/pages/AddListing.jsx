@@ -48,7 +48,7 @@ export const AddListing = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-blue-200 via-indigo-100 to-blue-50 py-6 sm:py-10 px-3 sm:px-4 text-blue-950 font-medium">
-       <DashBoardHeader/>
+      <DashBoardHeader />
       <div className="w-full mt-20 max-w-5xl">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 sm:mb-10 text-blue-900 tracking-tight drop-shadow-lg animate-fade-in">
           Create a New Listing
@@ -355,71 +355,81 @@ export const AddListing = () => {
           {step === 3 && (
             <form
               onSubmit={async (e) => {
-                e.preventDefault(); // handle submit here
-
-                const sendData = new FormData();
-
-                // normal fields
-                sendData.append("title", formData.title);
-                sendData.append("email", formData.email);
-                sendData.append("rent", formData.rent);
-                sendData.append("rentalTerms", formData.rentalTerms);
-                sendData.append("address", formData.address);
-                sendData.append("description", formData.description);
-                sendData.append("type", formData.type);
-                sendData.append("roomAvailable", formData.roomAvailable);
-                sendData.append("bathrooms", formData.bathrooms);
-                sendData.append("nearestCity", formData.nearestCity);
-                sendData.append("connectivity", formData.connectivity);
-                sendData.append("phoneNumber", formData.phoneNumber);
-
-                // thumbnail
-                if (formData.thumbnail) {
-                  sendData.append("thumbnail", formData.thumbnail);
-                }
-
-                // photos (loop)
-                formData.photos.forEach((photo) => {
-                  sendData.append("photos", photo);
-                });
-
-                // videos (loop)
-                formData.videos.forEach((video) => {
-                  sendData.append("videos", video);
-                });
+                e.preventDefault();
 
                 try {
-                  setLoading(true); // start loading
+                  setLoading(true);
+
+                  const sendData = new FormData();
+
+                  // normal fields
+                  sendData.append("title", formData.title || "");
+                  sendData.append("email", formData.email || "");
+                  sendData.append("rent", formData.rent || "");
+                  sendData.append("rentalTerms", formData.rentalTerms || "");
+                  sendData.append("address", formData.address || "");
+                  sendData.append("description", formData.description || "");
+                  sendData.append("type", formData.type || "");
+                  sendData.append(
+                    "roomAvailable",
+                    formData.roomAvailable || "",
+                  );
+                  sendData.append("bathrooms", formData.bathrooms || "");
+                  sendData.append("nearestCity", formData.nearestCity || "");
+                  sendData.append("connectivity", formData.connectivity || "");
+                  sendData.append("phoneNumber", formData.phoneNumber || "");
+
+                  // thumbnail
+                  if (formData.thumbnail) {
+                    sendData.append("thumbnail", formData.thumbnail);
+                  }
+
+                  // photos
+                  if (formData.photos?.length) {
+                    formData.photos.forEach((photo) => {
+                      sendData.append("photos", photo);
+                    });
+                  }
+
+                  // videos
+                  if (formData.videos?.length) {
+                    formData.videos.forEach((video) => {
+                      sendData.append("videos", video);
+                    });
+                  }
 
                   const response = await axios.post(
                     "https://roommate-backend-1.onrender.com/api/room/add-room",
                     sendData,
-                    // {
-                    //   headers: {
-                    //     "Content-Type": "multipart/form-data",
-                    //   },
-                    // },
                   );
 
-                  if (response.data.statusCode >= 400) {
-                    toast.error(response.data.message, {
-                      position: "top-center",
-                      autoClose: 2000,
-                    });
+                  if (response.data?.statusCode >= 400) {
+                    toast.error(
+                      response.data.message || "Something went wrong",
+                      {
+                        position: "top-center",
+                        autoClose: 2000,
+                      },
+                    );
                   } else {
-                    toast.success(response.data.message, {
-                      position: "top-center",
-                      autoClose: 2000,
-                    });
+                    toast.success(
+                      response.data.message || "Room added successfully",
+                      {
+                        position: "top-center",
+                        autoClose: 2000,
+                      },
+                    );
                   }
                 } catch (error) {
-                  toast.error("Fields are incorrect", {
-                    position: "top-center",
-                    autoClose: 2000,
-                  });
+                  toast.error(
+                    error?.response?.data?.message || "Fields are incorrect",
+                    {
+                      position: "top-center",
+                      autoClose: 2000,
+                    },
+                  );
                 } finally {
-                  setLoading(false); 
-                  setStep(1); 
+                  setLoading(false);
                 }
               }}
               className="space-y-4 sm:space-y-6 md:space-y-8"
@@ -448,10 +458,13 @@ export const AddListing = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-linear-to-r from-green-500 to-blue-500 text-white font-bold px-4 sm:px-8 py-2 rounded-lg shadow-lg hover:from-green-700 hover:to-blue-700 transition-all duration-200 hover:shadow-xl text-sm sm:text-base order-1 sm:order-2"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-linear-to-r from-green-500 to-blue-500  text-white font-bold px-4 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg  hover:from-green-700 hover:to-blue-700 transition-all duration-200 hover:shadow-xl text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {loading ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <>
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span className="text-xs sm:text-sm">Submitting...</span>
+                    </>
                   ) : (
                     "Submit"
                   )}

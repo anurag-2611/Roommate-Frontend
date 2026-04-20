@@ -12,10 +12,7 @@ import {
   Home as HomeIcon,
   Users,
   MapPin,
-  Heart,
   Search,
-  MessageCircle,
-  Plus,
 } from "lucide-react";
 import axios from "axios";
 
