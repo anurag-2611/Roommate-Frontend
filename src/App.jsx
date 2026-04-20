@@ -26,12 +26,20 @@ import { NotFound } from "./pages/NotFound";
 
 export const App = () => {
   return (
-    <div  className="bg w-full h-full text-white flex  items-start">
+    <div className="bg w-full h-full text-white flex  items-start">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/create-profile" element={<CreateProfile />} />
+
+        <Route
+          path="/create-profile"
+          element={
+            <ProtectedRoute>
+              <CreateProfile />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Protected Routes */}
         <Route

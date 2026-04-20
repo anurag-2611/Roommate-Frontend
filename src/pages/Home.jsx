@@ -452,10 +452,8 @@ export const Home = () => {
 
         {/* Listings Grid */}
         {Loading ? (
-          <div class="animate-pulse space-y-4 p-4 max-w-sm mx-auto">
-            <div class="h-6 bg-gray-300 rounded w-3/4"></div>
-            <div class="h-6 bg-gray-300 rounded w-full"></div>
-            <div class="h-6 bg-gray-300 rounded w-5/6"></div>
+          <div class="flex justify-center items-center ">
+            <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
           <div
