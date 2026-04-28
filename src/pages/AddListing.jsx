@@ -357,68 +357,83 @@ export const AddListing = () => {
               onSubmit={async (e) => {
                 e.preventDefault();
 
+                if (loading) return; // prevent double submit
+
                 try {
                   setLoading(true);
 
                   const sendData = new FormData();
 
+                  // helper to append safely
+                  const appendField = (key, value) => {
+                    sendData.append(key, value ?? "");
+                  };
+
                   // normal fields
-                  sendData.append("title", formData.title || "");
-                  sendData.append("email", formData.email || "");
-                  sendData.append("rent", formData.rent || "");
-                  sendData.append("rentalTerms", formData.rentalTerms || "");
-                  sendData.append("address", formData.address || "");
-                  sendData.append("description", formData.description || "");
-                  sendData.append("type", formData.type || "");
-                  sendData.append(
-                    "roomAvailable",
-                    formData.roomAvailable || "",
-                  );
-                  sendData.append("bathrooms", formData.bathrooms || "");
-                  sendData.append("nearestCity", formData.nearestCity || "");
-                  sendData.append("connectivity", formData.connectivity || "");
-                  sendData.append("phoneNumber", formData.phoneNumber || "");
+                  appendField("title", formData.title);
+                  appendField("email", formData.email);
+                  appendField("rent", formData.rent);
+                  appendField("rentalTerms", formData.rentalTerms);
+                  appendField("address", formData.address);
+                  appendField("description", formData.description);
+                  appendField("type", formData.type);
+                  appendField("roomAvailable", formData.roomAvailable);
+                  appendField("bathrooms", formData.bathrooms);
+                  appendField("nearestCity", formData.nearestCity);
+                  appendField("connectivity", formData.connectivity);
+                  appendField("phoneNumber", formData.phoneNumber);
 
                   // thumbnail
-                  if (formData.thumbnail) {
+                  if (formData.thumbnail instanceof File) {
                     sendData.append("thumbnail", formData.thumbnail);
                   }
 
                   // photos
-                  if (formData.photos?.length) {
+                  if (
+                    Array.isArray(formData.photos) &&
+                    formData.photos.length > 0
+                  ) {
                     formData.photos.forEach((photo) => {
-                      sendData.append("photos", photo);
+                      if (photo instanceof File) {
+                        sendData.append("photos", photo);
+                      }
                     });
                   }
 
                   // videos
-                  if (formData.videos?.length) {
+                  if (
+                    Array.isArray(formData.videos) &&
+                    formData.videos.length > 0
+                  ) {
                     formData.videos.forEach((video) => {
-                      sendData.append("videos", video);
+                      if (video instanceof File) {
+                        sendData.append("videos", video);
+                      }
                     });
                   }
 
                   const response = await axios.post(
                     "https://roommate-backend-1.onrender.com/api/room/add-room",
                     sendData,
+                    {
+                      headers: {
+                        "Content-Type": "multipart/form-data",
+                      },
+                    },
                   );
 
-                  if (response.data?.statusCode >= 400) {
-                    toast.error(
-                      response.data.message || "Something went wrong",
-                      {
-                        position: "top-center",
-                        autoClose: 2000,
-                      },
-                    );
+                  const { statusCode, message } = response.data || {};
+
+                  if (statusCode >= 400) {
+                    toast.error(message || "Something went wrong", {
+                      position: "top-center",
+                      autoClose: 2000,
+                    });
                   } else {
-                    toast.success(
-                      response.data.message || "Room added successfully",
-                      {
-                        position: "top-center",
-                        autoClose: 2000,
-                      },
-                    );
+                    toast.success(message || "Room added successfully", {
+                      position: "top-center",
+                      autoClose: 2000,
+                    });
                   }
                 } catch (error) {
                   toast.error(
@@ -440,13 +455,14 @@ export const AddListing = () => {
                 </label>
                 <textarea
                   name="rentalTerms"
-                  value={formData.rentalTerms}
+                  value={formData.rentalTerms || ""}
                   onChange={handleChange}
                   required
                   className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 min-h-32 sm:min-h-40 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
                   placeholder="Enter rental terms, rules, and conditions..."
                 />
               </div>
+
               <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 mt-6 sm:mt-8">
                 <button
                   onClick={handleBack}
@@ -455,10 +471,11 @@ export const AddListing = () => {
                 >
                   Back
                 </button>
+
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-linear-to-r from-green-500 to-blue-500  text-white font-bold px-4 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg  hover:from-green-700 hover:to-blue-700 transition-all duration-200 hover:shadow-xl text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-linear-to-r from-green-500 to-blue-500 text-white font-bold px-4 sm:px-8 py-2 sm:py-3 rounded-lg shadow-lg hover:from-green-700 hover:to-blue-700 transition-all duration-200 hover:shadow-xl text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>
