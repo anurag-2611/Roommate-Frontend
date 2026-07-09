@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -19,6 +19,8 @@ export const Login = () => {
     reset,
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+
   useGSAP(() => {
     gsap.fromTo(
       ".login-form",
@@ -37,6 +39,8 @@ export const Login = () => {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
+
       const response = await login({
         email: data.email,
         password: data.password,
@@ -59,6 +63,8 @@ export const Login = () => {
         position: "top-center",
         autoClose: 2000,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,11 +117,22 @@ export const Login = () => {
             )}
           </div>
 
-          <input
-            className="bg-[#84ea51] py-1.5 rounded-xl text-black font-medium mt-10 cursor-pointer"
+          <button
             type="submit"
-            value="Login"
-          />
+            disabled={loading}
+            className={`w-full flex items-center justify-center gap-3 bg-[#84ea51] py-2 rounded-xl text-black font-medium mt-10 ${
+              loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                <span>Logging in...</span>
+              </>
+            ) : (
+              "Login"
+            )}
+          </button>
         </form>
 
         <p className="text-black mt-4">

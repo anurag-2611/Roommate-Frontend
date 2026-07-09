@@ -15,14 +15,14 @@ export const Profile = () => {
   const sendFriendRequest = async (profileId) => {
     try {
       const response = await axios.post(
-        `https://roommate-backend-1.onrender.com/api/user/my-listings/api/friend/send-request/${profileId}`,
+        `https://roommate-backend-1.onrender.com/api/friend/send-request/${profileId}`,
         {},
         {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       toast.success(response.data.message || "Request sent");
@@ -155,47 +155,45 @@ export const Profile = () => {
 
       {/* Profiles Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-28 sm:mt-32 lg:mt-24 gap-10 wrap-break-words justify-items-center">
-        {Users
-          .filter((user) => user._id !== profile?._id)
-          .map((user) => (
-            <div
-              key={user._id}
-              className="relative group w-full max-w-70 min-h-70 rounded-3xl p-6 flex flex-col items-center bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg -mt-14 bg-white z-10">
-                <img
-                  src={user.avatar}
-                  alt="profile"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.target.src = "/fallback.webp";
-                  }}
-                />
-              </div>
-
-              <div className="flex flex-col items-center flex-1 text-center mt-5 z-10">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  {user.fullName}
-                </h2>
-
-                <p className="text-sm text-purple-600 font-medium">
-                  @{user.userName}
-                </p>
-
-                <p className="text-xs text-gray-600 mt-2 line-clamp-2">
-                  {user.bio || "No bio available"}
-                </p>
-              </div>
-
-              <button
-                onClick={() => sendFriendRequest(user._id)}
-                className="z-10 mt-auto w-full py-2 rounded-xl font-medium bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all"
-              >
-                Send Request
-              </button>
+        {Users.filter((user) => user._id !== profile?._id).map((user) => (
+          <div
+            key={user._id}
+            className="relative group w-full max-w-70 min-h-70 rounded-3xl p-6 flex flex-col items-center bg-white/30 backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+          >
+            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg -mt-14 bg-white z-10">
+              <img
+                src={user.avatar}
+                alt="profile"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = "/fallback.webp";
+                }}
+              />
             </div>
-          ))}
+
+            <div className="flex flex-col items-center flex-1 text-center mt-5 z-10">
+              <h2 className="text-lg font-semibold text-gray-900">
+                {user.fullName}
+              </h2>
+
+              <p className="text-sm text-purple-600 font-medium">
+                @{user.userName}
+              </p>
+
+              <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+                {user.bio || "No bio available"}
+              </p>
+            </div>
+
+            <button
+              onClick={() => sendFriendRequest(user._id)}
+              className="z-10 mt-auto w-full py-2 rounded-xl font-medium bg-linear-to-r from-green-400 to-emerald-500 text-white shadow-md hover:scale-105 hover:shadow-lg active:scale-95 transition-all"
+            >
+              Send Request
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

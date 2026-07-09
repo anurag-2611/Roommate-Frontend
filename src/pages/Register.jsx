@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
@@ -20,6 +20,8 @@ export const Register = () => {
     reset,
   } = useForm();
 
+  const [loading, setLoading] = useState(false);
+
   useGSAP(() => {
     gsap.fromTo(
       ".signup-form",
@@ -38,6 +40,8 @@ export const Register = () => {
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
+
       const result = await registerUser({
         firstName: data.firstName,
         lastName: data.lastName,
@@ -47,13 +51,13 @@ export const Register = () => {
 
       if (result.statusCode >= 400) {
         toast.error("User already registered", {
-        position: "top-center",
-        autoClose: 2000,
+          position: "top-center",
+          autoClose: 2000,
         });
       } else {
         toast.success(result.message, {
-        position: "top-center",
-        autoClose: 2000,
+          position: "top-center",
+          autoClose: 2000,
         });
 
         reset();
@@ -67,6 +71,8 @@ export const Register = () => {
         position: "top-center",
         autoClose: 2000,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -142,10 +148,22 @@ export const Register = () => {
             )}
           </div>
 
-          <input
-            className="bg-[#84ea51] py-1.5 rounded-xl text-black font-medium cursor-pointer"
+          <button
             type="submit"
-          />
+            disabled={loading}
+            className={`w-full flex items-center justify-center gap-3 bg-[#84ea51] py-2 rounded-xl text-black font-medium mt-2 ${
+              loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+            }`}
+          >
+            {loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                <span>Registering...</span>
+              </>
+            ) : (
+              "Create Account"
+            )}
+          </button>
           <p className="text-black ml-6">
             Already have an account?{" "}
             <Link to="/login" className="text-blue-900 underline">
