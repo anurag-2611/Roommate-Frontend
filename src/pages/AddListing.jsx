@@ -414,6 +414,7 @@ export const AddListing = () => {
                       headers: {
                         "Content-Type": "multipart/form-data",
                       },
+                      withCredentials: true, // 👈 important line , we cant send token in backend after deployment
                     },
                   );
 
