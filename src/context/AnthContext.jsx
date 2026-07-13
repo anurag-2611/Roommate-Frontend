@@ -22,13 +22,16 @@ export const AuthProvider = ({ children }) => {
     return response;
   };
 
-  const logout = async () => {
-    const response = await logoutUser();
+const logout = async () => {
+  try {
+    await logoutUser();
+  } catch (error) {
+    console.error("Logout API call failed:", error?.response?.data?.message || error.message);
+  } finally {
     localStorage.removeItem("accessToken");
     setUser(null);
-
-    return response;
-  };
+  }
+};
 
   const getMe = async () => {
     const response = await getCurrentUser();
