@@ -46,7 +46,7 @@ export const Login = () => {
         password: data.password,
       });
 
-      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("accessToken", response.data.data.accessToken);
 
       toast.success("Login successful 🎉", {
         position: "top-center",
