@@ -17,13 +17,19 @@ const loginUser = async (userData) => {
 };
 
 const logoutUser = async () => {
+  const token = localStorage.getItem("accessToken");
+
   const response = await axios.post(
     "https://roommate-backend-1.onrender.com/api/user/logout",
     {},
     {
       withCredentials: true,
-    },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
+
   return response.data;
 };
 
