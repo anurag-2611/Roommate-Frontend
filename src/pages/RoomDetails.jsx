@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Footer } from "../components/Footer";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 export const RoomDetails = () => {
@@ -56,62 +55,61 @@ export const RoomDetails = () => {
           "-=0.5",
         );
 
-        gsap.from(reviewRef.current, {
-          scrollTrigger: {
-            trigger: reviewRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          opacity: 0,
-          y: 60,
-          duration: 0.9,
-        });
+      gsap.from(reviewRef.current, {
+        scrollTrigger: {
+          trigger: reviewRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.9,
+      });
 
-        gsap.from(descriptionRef.current, {
-          scrollTrigger: {
-            trigger: descriptionRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          opacity: 0,
-          y: 60,
-          duration: 0.9,
-        });
+      gsap.from(descriptionRef.current, {
+        scrollTrigger: {
+          trigger: descriptionRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        y: 60,
+        duration: 0.9,
+      });
 
-        gsap.from(priceCardRef.current, {
-          scrollTrigger: {
-            trigger: priceCardRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          opacity: 0,
-          x: 60,
-          duration: 0.9,
-        });
+      gsap.from(priceCardRef.current, {
+        scrollTrigger: {
+          trigger: priceCardRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        x: 60,
+        duration: 0.9,
+      });
 
-        gsap.from(Array.from(photosRef.current.children), {
-          scrollTrigger: {
-            trigger: photosRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          opacity: 0,
-          y: 50,
-          stagger: 0.15,
-          duration: 0.8,
-        });
+      gsap.from(Array.from(photosRef.current.children), {
+        scrollTrigger: {
+          trigger: photosRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        y: 50,
+        stagger: 0.15,
+        duration: 0.8,
+      });
 
-        gsap.from(propertyVideoRef.current, {
-          scrollTrigger: {
-            trigger: propertyVideoRef.current,
-            start: "top 85%",
-            once: true,
-          },
-          opacity: 0,
-          y: 60,
-          duration: 1,
-        });
-
+      gsap.from(propertyVideoRef.current, {
+        scrollTrigger: {
+          trigger: propertyVideoRef.current,
+          start: "top 85%",
+          once: true,
+        },
+        opacity: 0,
+        y: 60,
+        duration: 1,
+      });
     }, pageRef);
 
     return () => ctx.revert();
@@ -124,8 +122,8 @@ export const RoomDetails = () => {
           `https://roommate-backend-1.onrender.com/api/room/rooms/${id}`,
         );
         setRoom(res.data.data);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        /* ignore room details fetch error */
       }
     };
 
@@ -313,19 +311,19 @@ export const RoomDetails = () => {
         </div>
 
         {/* Extra large media section */}
-              <h2 className="text-2xl sm:text-3xl mb-5 mt-20">Property Video</h2>
-            <div
-              ref={photosRef}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
-              <div className="h-64 rounded-2xl overflow-hidden bg-white shadow-sm">
-                <img
-                  src={room?.photos?.[0]}
-                  alt="room"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+        <h2 className="text-2xl sm:text-3xl mb-5 mt-20">Property Video</h2>
+        <div
+          ref={photosRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          <div className="h-64 rounded-2xl overflow-hidden bg-white shadow-sm">
+            <img
+              src={room?.photos?.[0]}
+              alt="room"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
 
         {mainVideo && (
           <div className="mt-12">

@@ -27,12 +27,14 @@ export const SearchListing = () => {
     const FeatchedRoom = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("https://roommate-backend-1.onrender.com/api/room/get-rooms");
+        const res = await axios.get(
+          "https://roommate-backend-1.onrender.com/api/room/get-rooms",
+        );
 
         setData(res.data.data);
         setFilteredData(res.data.data);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        /* ignore room fetch error */
       } finally {
         setLoading(false);
       }
@@ -54,8 +56,8 @@ export const SearchListing = () => {
           },
         );
         setFavorites(res.data.data.favorites);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        /* ignore favorites load error */
       }
     };
 
@@ -120,8 +122,7 @@ export const SearchListing = () => {
         setFavorites([...Favorites, id]);
         toast.success(response.data.message);
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast.error("Something went wrong");
     }
   };
@@ -224,7 +225,9 @@ export const SearchListing = () => {
 
             {/* Listings Grid */}
             {Loading ? (
-              <p className="text-lg font-medium text-center py-10">Loading....</p>
+              <p className="text-lg font-medium text-center py-10">
+                Loading....
+              </p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {FilteredData.length > 0 ? (

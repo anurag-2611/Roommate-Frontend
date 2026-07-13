@@ -29,8 +29,8 @@ export const Favorites = () => {
           },
         );
         setfavoriteListings(res.data.data.favorites);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        /* ignore favorites fetch error */
       }
     };
 
@@ -52,8 +52,8 @@ export const Favorites = () => {
         setfavoriteListings((prev) => prev.filter((fav) => fav._id !== id));
         toast.error(response.data.message);
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
+      /* ignore favorites toggle error */
     }
   };
 

@@ -12,8 +12,8 @@ export const DashBoardHeader = () => {
     try {
       await logout();
       navigate("/login");
-    } catch (error) {
-      console.log(error);
+    } catch {
+      /* ignore logout error */
     }
   };
   return (

@@ -264,7 +264,6 @@ export const AddListing = () => {
                     onChange={(e) => {
                       const file = e.target.files[0];
                       setFormData((prev) => ({ ...prev, thumbnail: file }));
-                      // console.log(formData);
                     }}
                     className="w-full mr-5 border-2 border-blue-200 rounded-lg px-4 py-2 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
                   />
@@ -293,8 +292,6 @@ export const AddListing = () => {
                         ...prev,
                         photos: [...prev.photos, ...files],
                       }));
-
-                      // console.log(formData);
                     }}
                     className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
                   />
@@ -328,8 +325,6 @@ export const AddListing = () => {
                         ...prev,
                         videos: [...prev.videos, file],
                       }));
-
-                      console.log(formData);
                     }}
                     className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
                   />

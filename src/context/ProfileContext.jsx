@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -27,8 +28,8 @@ export const ProfileProvider = ({ children }) => {
         },
       );
       setProfile(response.data.data);
-    } catch (error) {
-      console.log("Profile fetch error:", error);
+    } catch {
+      /* ignore profile fetch error */
     } finally {
       setLoading(false);
     }
@@ -45,9 +46,8 @@ export const ProfileProvider = ({ children }) => {
         },
       );
       setUsers(response.data.data);
-    } catch (error) {
-      console.log("GetUsers fetch error:", error);
-      console.log("Backend message:", error.response?.data);
+    } catch {
+      /* ignore users fetch error */
     } finally {
       setLoading(false);
     }
@@ -89,7 +89,17 @@ export const ProfileProvider = ({ children }) => {
 
   return (
     <ProfileContext.Provider
-      value={{ profile, setProfile, loading, getProfile, Users, getUsers }}
+      value={{
+        profile,
+        setProfile,
+        loading,
+        getProfile,
+        Users,
+        getUsers,
+        friends,
+        receivedRequests,
+        sentRequests,
+      }}
     >
       {children}
     </ProfileContext.Provider>

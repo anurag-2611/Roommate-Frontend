@@ -37,8 +37,7 @@ export const Home = () => {
 
       setData(res.data.data);
       return res.data.data;
-    } catch (error) {
-      console.log(error);
+    } catch {
       return [];
     } finally {
       setLoading(false);

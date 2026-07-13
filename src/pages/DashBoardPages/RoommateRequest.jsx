@@ -6,7 +6,6 @@ import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 export const RoommateRequest = () => {
   const [receivedRequests, setReceivedRequests] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [sentRequests, setSentRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchFriendData = async () => {
@@ -26,7 +25,6 @@ export const RoommateRequest = () => {
 
       setFriends(response.data?.data?.friends || []);
       setReceivedRequests(response.data?.data?.receivedRequests || []);
-      setSentRequests(response.data?.data?.sentRequests || []);
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Failed to load friend requests",

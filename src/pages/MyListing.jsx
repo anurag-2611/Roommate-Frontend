@@ -23,11 +23,10 @@ export const MyListing = () => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
-        console.log(response.data);        
         setListings(response.data.data);
-      } catch (err) {
+      } catch {
         setError("Failed to fetch your listings");
       } finally {
         setLoading(false);
@@ -53,9 +52,7 @@ export const MyListing = () => {
         )}
 
         {error && (
-          <div className="text-center text-red-500 text-lg">
-            {error}
-          </div>
+          <div className="text-center text-red-500 text-lg">{error}</div>
         )}
 
         {!loading && !error && listings.length === 0 && (

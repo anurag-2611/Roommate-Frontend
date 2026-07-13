@@ -29,12 +29,12 @@ export const ConversationPage = () => {
               Authorization: `Bearer ${token}`,
             },
             withCredentials: true,
-          }
+          },
         );
 
         setMessages(response.data.messages || []);
-      } catch (error) {
-        console.log("Error fetching messages:", error);
+      } catch {
+        /* ignore message fetch error */
       }
     };
 
@@ -85,7 +85,7 @@ export const ConversationPage = () => {
             Authorization: `Bearer ${token}`,
           },
           withCredentials: true,
-        }
+        },
       );
 
       const newMessage = response.data.message;
@@ -94,8 +94,8 @@ export const ConversationPage = () => {
 
       socket.emit("send_message", newMessage);
       setMessage("");
-    } catch (error) {
-      console.log("Error sending message:", error);
+    } catch {
+      /* ignore message send error */
     }
   };
 

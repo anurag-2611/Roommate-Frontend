@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import { Rooms } from "../components/Rooms";
 import { Footer } from "../components/Footer";
@@ -58,7 +58,7 @@ export const DashBoard = () => {
     });
     cardsRef.current.forEach((card, index) => {
       gsap.to(card, {
-        y: index % 2 === 0 ? -15 :15 , // alternate floating
+        y: index % 2 === 0 ? -15 : 15, // alternate floating
         duration: 1 + index * 0.2,
         repeat: -1,
         delay: 1,
@@ -74,7 +74,7 @@ export const DashBoard = () => {
       ease: "power2.out",
       scrollTrigger: {
         trigger: profileRef.current,
-        start: "top 55%", 
+        start: "top 55%",
         end: "top 50%",
       },
     });
@@ -83,22 +83,20 @@ export const DashBoard = () => {
       y: 50,
       opacity: 0,
       duration: 1,
-      delay:0.2,
+      delay: 0.2,
       stagger: 0.2, // smoother
       ease: "power3.out",
       scrollTrigger: {
         trigger: profileRef.current,
         start: "top 0%", // when element enters viewport
         end: "top 10%",
-        scrub:2,   
+        scrub: 2,
       },
     });
   });
 
   useEffect(() => {
     getMe();
-
-    console.log(user);
   }, []);
 
   const handleClick = () => {
@@ -115,7 +113,7 @@ export const DashBoard = () => {
       <DashBoardHeader />
 
       <div className="mb-5 mt-20 sm:mt-[8%] p-5 px-4 sm:px-8 md:px-10 flex flex-row  justify-between items-start sm:items-center gap-4 max-w-6xl mx-auto w-full">
-        <div ref={mainTextRef} >
+        <div ref={mainTextRef}>
           <h2 className="text-3xl sm:text-3xl md:text-4xl text-black/90 font-bold ml-2">
             <span className="block sm:inline-block text-[20px] ml-1 sm:ml-0 sm:text-4xl text-purple-800">
               Hello !
@@ -245,13 +243,14 @@ export const DashBoard = () => {
         </div>
       </div>
 
-      <div
-        className="px-4 sm:px-8 md:px-10 max-w-6xl mx-auto w-full bg-white/35 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl mt-20 mb-20 py-10"
-      >
+      <div className="px-4 sm:px-8 md:px-10 max-w-6xl mx-auto w-full bg-white/35 backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl mt-20 mb-20 py-10">
         <h2 className="relative text-start text-xl sm:text-2xl font-medium text-amber-800 mb-5">
           Recommended Listings
         </h2>
-        <div ref={RecommendingRef} className="flex flex-wrap w-full gap-4 sm:gap-10 justify-center">
+        <div
+          ref={RecommendingRef}
+          className="flex flex-wrap w-full gap-4 sm:gap-10 justify-center"
+        >
           <Rooms />
         </div>
       </div>

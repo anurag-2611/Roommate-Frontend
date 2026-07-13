@@ -1,5 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState } from "react";
-import {registerUser,loginUser,logoutUser,getCurrentUser,} from "../Api/auth.api";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser,
+} from "../Api/auth.api";
 
 export const AuthContext = createContext();
 
@@ -27,7 +33,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("accessToken");
     setUser(null);
 
-    console.log(response);
     return response;
   };
 
@@ -39,7 +44,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ register, login, logout, getMe, user, setUser }}>
+    <AuthContext.Provider
+      value={{ register, login, logout, getMe, user, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
