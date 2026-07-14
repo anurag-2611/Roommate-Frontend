@@ -7,18 +7,18 @@ import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Footer } from "../../components/Footer";
-
+ 
 export const Favorites = () => {
   const token = localStorage.getItem("accessToken");
   const [favoriteListings, setfavoriteListings] = useState([]);
-
+ 
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     const getFavorites = async () => {
       try {
         if (!token) return;
-
+ 
         const res = await axios.get(
           "https://roommate-backend-1.onrender.com/api/user/favorites",
           {
@@ -33,13 +33,15 @@ export const Favorites = () => {
         /* ignore favorites fetch error */
       }
     };
-
+ 
     getFavorites();
   }, []);
-
+ 
   const toggleFavorite = async (id) => {
     try {
-      if (favoriteListings.some((item) => item._id === id)) {
+      const isFavorite = favoriteListings.some((item) => item._id === id);
+ 
+      if (isFavorite) {
         const response = await axios.delete(
           `https://roommate-backend-1.onrender.com/api/user/remove-favorite/${id}`,
           {
@@ -50,20 +52,33 @@ export const Favorites = () => {
           },
         );
         setfavoriteListings((prev) => prev.filter((fav) => fav._id !== id));
-        toast.error(response.data.message);
+        toast.error(response.data.message || "Removed from favorites");
+      } else {
+        const response = await axios.post(
+          `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
+          {},
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        setfavoriteListings((prev) => [...prev, response.data.data]);
+        toast.success(response.data.message || "Added to favorites");
       }
     } catch {
-      /* ignore favorites toggle error */
+      toast.error("Something went wrong, please try again");
     }
   };
-
+ 
   return (
     <div>
       {" "}
       <div className="min-h-screen pt-25 bg-linear-to-br from-blue-200 to-gray-100 p-6 absolute w-full">
         {/* Navbar */}
         <DashBoardHeader />
-
+ 
         <div className="flex gap-6">
           {/* Main Content */}
           <div className="flex flex-col justify-center items-center -ml-6 sm:ml-0  w-[90%] sm:w-[80%]">
@@ -78,12 +93,12 @@ export const Favorites = () => {
                   </svg>
                 </h2>
               </div>
-
+ 
               <p className="text-gray-500 hidden sm:block">
                 Properties you have saved for later
               </p>
             </div>
-
+ 
             {/* Favorites Grid */}
             {favoriteListings.length === 0 ? (
               <div className="bg-white w-full relative left-[12%] text-3xl rounded-2xl shadow-md p-10 py-20 mt-20 sm:mt-2 text-center text-gray-500 hover:scale-105 transition-transform duration-300">
@@ -115,7 +130,7 @@ export const Favorites = () => {
                         }`}
                       />
                     </div>
-
+ 
                     <div className="p-4">
                       <h3 className="text-lg font-semibold text-purple-800">
                         {item.rent} <span className="text-sm">/ month</span>
