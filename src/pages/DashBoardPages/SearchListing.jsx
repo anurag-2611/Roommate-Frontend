@@ -94,38 +94,38 @@ export const SearchListing = () => {
     setFilteredData(data);
   };
 
-  const toggleFavorite = async (id) => {
-    try {
-      if (Favorites.includes(id)) {
-        const response = await axios.delete(
-          `http://localhost:5000/api/user/remove-favorite/${id}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+const toggleFavorite = async (id) => {
+  try {
+    if (Favorites.includes(id)) {
+      const response = await axios.delete(
+        `https://roommate-backend-1.onrender.com/api/user/remove-favorite/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
-        setFavorites(Favorites.filter((fav) => fav !== id));
-        toast.error(response.data.message);
-      } else {
-        const response = await axios.post(
-          `http://localhost:5000/api/user/add-favorite/${id}`,
-          {},
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        },
+      );
+      setFavorites(Favorites.filter((fav) => fav !== id));
+      toast.error(response.data.message);
+    } else {
+      const response = await axios.post(
+        `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
-        setFavorites([...Favorites, id]);
-        toast.success(response.data.message);
-      }
-    } catch {
-      toast.error("Something went wrong");
+        },
+      );
+      setFavorites([...Favorites, id]);
+      toast.success(response.data.message);
     }
-  };
+  } catch {
+    toast.error("Something went wrong");
+  }
+};
 
   return (
     <div className="w-full overflow-x-hidden">
