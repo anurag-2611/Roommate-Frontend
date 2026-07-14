@@ -407,14 +407,16 @@ export const AddListing = () => {
                     });
                   }
 
+                  const token = localStorage.getItem("accessToken");
+
                   const response = await axios.post(
                     "https://roommate-backend-1.onrender.com/api/room/add-room",
                     sendData,
                     {
                       headers: {
                         "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${token}`,
                       },
-                      withCredentials: true, // 👈 important line , we cant send token in backend after deployment
                     },
                   );
 
