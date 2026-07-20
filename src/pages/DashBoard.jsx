@@ -58,7 +58,7 @@ export const DashBoard = () => {
     });
     cardsRef.current.forEach((card, index) => {
       gsap.to(card, {
-        y: index % 2 === 0 ? -15 : 15, // alternate floating
+        y: index % 2 === 0 ? -1 : 1, // alternate floating
         duration: 1 + index * 0.2,
         repeat: -1,
         delay: 1,
