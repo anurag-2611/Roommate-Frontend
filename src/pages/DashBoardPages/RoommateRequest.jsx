@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { statusFeedback } from "../../utils/statusFeedback";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 
 export const RoommateRequest = () => {
@@ -26,7 +26,7 @@ export const RoommateRequest = () => {
       setFriends(response.data?.data?.friends || []);
       setReceivedRequests(response.data?.data?.receivedRequests || []);
     } catch (error) {
-      toast.error(
+      statusFeedback.error(
         error.response?.data?.message || "Failed to load friend requests",
       );
     } finally {
@@ -53,10 +53,10 @@ export const RoommateRequest = () => {
         },
       );
 
-      toast.success(response.data.message || "Request accepted");
+      statusFeedback.success(response.data.message || "Roommate request accepted.");
       fetchFriendData();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to accept request");
+      statusFeedback.error(error.response?.data?.message || "We couldn’t accept this request. Please try again.");
     }
   };
 
@@ -75,10 +75,10 @@ export const RoommateRequest = () => {
         },
       );
 
-      toast.success(response.data.message || "Request rejected");
+      statusFeedback.success(response.data.message || "Roommate request rejected.");
       fetchFriendData();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to reject request");
+      statusFeedback.error(error.response?.data?.message || "We couldn’t reject this request. Please try again.");
     }
   };
 

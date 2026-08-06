@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { statusFeedback } from "../../utils/statusFeedback";
 import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 
@@ -34,7 +34,7 @@ export const Messages = () => {
       }
     } catch (error) {
       console.error("Friend fetch error:", error);
-      toast.error("Failed to load friends");
+      statusFeedback.error("We couldn’t load your friends. Please refresh the page and try again.");
       setFriends([]);
     } finally {
       setLoading(false);
@@ -61,10 +61,10 @@ export const Messages = () => {
 
       setFriends((prev) => prev.filter((friend) => friend._id !== friendId));
 
-      toast.success("Friend removed successfully");
+      statusFeedback.success("Friend removed successfully.");
     } catch (error) {
       console.error("Remove friend error:", error);
-      toast.error("Failed to remove friend");
+      statusFeedback.error("We couldn’t remove this friend. Please try again.");
     } finally {
       setRemoveLoading("");
     }

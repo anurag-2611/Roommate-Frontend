@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { statusFeedback } from "../../utils/statusFeedback";
+import { CloudImage } from "../../components/CloudImage";
 
 import { Footer } from "../../components/Footer";
 
@@ -107,7 +107,7 @@ const toggleFavorite = async (id) => {
         },
       );
       setFavorites(Favorites.filter((fav) => fav !== id));
-      toast.error(response.data.message);
+      statusFeedback.success(response.data.message || "Listing removed from your favorites.");
     } else {
       const response = await axios.post(
         `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
@@ -120,10 +120,10 @@ const toggleFavorite = async (id) => {
         },
       );
       setFavorites([...Favorites, id]);
-      toast.success(response.data.message);
+      statusFeedback.success(response.data.message || "Listing added to your favorites.");
     }
   } catch {
-    toast.error("Something went wrong");
+    statusFeedback.error("We couldn’t update your favorites. Please try again.");
   }
 };
 
@@ -238,10 +238,11 @@ const toggleFavorite = async (id) => {
                       className="bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition"
                     >
                       <div className="relative">
-                        <img
+                        <CloudImage
                           src={item.thumbnail}
                           alt="listing"
-                          className="h-48 sm:h-52 w-full object-cover"
+                          className="h-48 sm:h-52 w-full"
+                          loading="lazy"
                         />
                         <Heart
                           onClick={(e) => {
@@ -279,7 +280,6 @@ const toggleFavorite = async (id) => {
               </div>
             )}
 
-            <ToastContainer />
           </div>
         </div>
       </div>

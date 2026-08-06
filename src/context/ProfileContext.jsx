@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { statusFeedback } from "../utils/statusFeedback";
 
 export const ProfileContext = createContext();
 
@@ -71,7 +71,7 @@ export const ProfileProvider = ({ children }) => {
       setReceivedRequests(response.data.data.receivedRequests || []);
       setSentRequests(response.data.data.sentRequests || []);
     } catch (error) {
-      toast.error(
+      statusFeedback.error(
         error.response?.data?.message || "Failed to load friend data",
       );
     }

@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { statusFeedback } from "../utils/statusFeedback";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import { Footer } from "../components/Footer";
  
@@ -127,10 +127,7 @@ export const AddListing = () => {
       // "statusCode" field in the response body.
       const message = response?.data?.message || "Room added successfully";
  
-      toast.success(message, {
-        position: "top-center",
-        autoClose: 2000,
-      });
+      statusFeedback.success(message);
  
       setSubmitted(true);
     } catch (error) {
@@ -139,10 +136,7 @@ export const AddListing = () => {
         error?.message ||
         "Something went wrong. Please check your fields and try again.";
  
-      toast.error(message, {
-        position: "top-center",
-        autoClose: 2000,
-      });
+      statusFeedback.error(message);
     } finally {
       setLoading(false);
     }

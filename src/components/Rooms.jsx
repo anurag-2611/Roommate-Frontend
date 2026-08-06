@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { CloudImage } from "./CloudImage";
 import { useNavigate } from "react-router-dom";
 
 export const Rooms = () => {
@@ -66,11 +67,11 @@ export const Rooms = () => {
             className="box w-full sm:w-[48%] lg:w-[45%] min-h-100 my-2 flex flex-col items-center border border-black/20 rounded-lg shadow-lg overflow-hidden"
           >
             <div className="h-62 sm:h-65 md:h-70 w-full">
-              <img
+              <CloudImage
                 src={room.thumbnail}
                 alt={room.title}
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className="w-full h-full"
                 onError={(e) => {
                   e.target.src = "/fallback-room.jpg";
                 }}

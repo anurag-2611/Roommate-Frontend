@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import "react-toastify/dist/ReactToastify.css";
-import { toast, ToastContainer } from "react-toastify";
+import { statusFeedback } from "../utils/statusFeedback";
 
 export const CreateProfile = () => {
   const token = localStorage.getItem("accessToken");
@@ -52,7 +51,7 @@ export const CreateProfile = () => {
   };
 
   const showSuccessToast = (message) => {
-    toast.success(message || "Profile created successfully 🎉", {
+    statusFeedback.success(message || "Your profile has been created.", {
       position: "top-center",
       autoClose: 2200,
       hideProgressBar: false,
@@ -64,7 +63,7 @@ export const CreateProfile = () => {
   };
 
   const showErrorToast = (message) => {
-    toast.error(message || "Something went wrong", {
+    statusFeedback.error(message || "We couldn’t create your profile. Please review the details and try again.", {
       position: "top-center",
       autoClose: 1800,
       hideProgressBar: false,

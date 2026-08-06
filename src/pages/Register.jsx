@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { statusFeedback } from "../utils/statusFeedback";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { registerUser } from "../Api/auth.api";
@@ -49,12 +48,12 @@ export const Register = () => {
       });
 
       if (result.statusCode >= 400) {
-        toast.error("User already registered", {
+        statusFeedback.error("An account already exists with this email address.", {
           position: "top-center",
           autoClose: 2000,
         });
       } else {
-        toast.success(result.message, {
+        statusFeedback.success(result.message || "Your account has been created. You can sign in now.", {
           position: "top-center",
           autoClose: 2000,
         });
@@ -66,7 +65,7 @@ export const Register = () => {
         }, 3000);
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong", {
+      statusFeedback.error(error?.response?.data?.message || "We couldn’t create your account. Please review your details and try again.", {
         position: "top-center",
         autoClose: 2000,
       });
@@ -171,7 +170,6 @@ export const Register = () => {
           </p>
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 };

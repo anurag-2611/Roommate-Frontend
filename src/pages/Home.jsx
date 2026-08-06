@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Images } from "../components/Images";
+import { CloudImage } from "../components/CloudImage";
 import { Rooms } from "../components/Rooms";
 import roommateImage from "/Room-mate handshake.png";
 import gsap from "gsap";
@@ -467,10 +468,11 @@ export const Home = () => {
                   className="bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition"
                 >
                   <div className="relative">
-                    <img
+                    <CloudImage
                       src={item.thumbnail}
                       alt="listing"
-                      className="h-48 w-full object-cover"
+                      className="h-48 w-full"
+                      loading="lazy"
                     />
                   </div>
 

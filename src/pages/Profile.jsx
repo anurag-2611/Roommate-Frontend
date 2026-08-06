@@ -3,7 +3,7 @@ import { ProfileContext } from "../context/ProfileContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import RoomMatelogo from "../assets/RoomMate logo.png";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { statusFeedback } from "../utils/statusFeedback";
 
 export const Profile = () => {
   const token = localStorage.getItem("accessToken");
@@ -25,9 +25,9 @@ export const Profile = () => {
         },
       );
 
-      toast.success(response.data.message || "Request sent");
+      statusFeedback.success(response.data.message || "Your roommate request has been sent.");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to send request");
+      statusFeedback.error(error.response?.data?.message || "We couldn’t send your request. Please try again.");
     }
   };
 

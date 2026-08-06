@@ -1,6 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { Home } from "./pages/Home";
 import { Routes } from "react-router-dom";
@@ -23,6 +21,7 @@ import { MyListing } from "./pages/MyListing";
 import { ConversationPage } from "./pages/ConversationPage";
 
 import { NotFound } from "./pages/NotFound";
+import { AppStatus } from "./components/AppStatus";
 
 export const App = () => {
   return (
@@ -138,8 +137,7 @@ export const App = () => {
         {/* 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-
-      <ToastContainer position="top-center" autoClose={2000} />
+      <AppStatus />
     </div>
   );
 };

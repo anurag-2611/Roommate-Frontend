@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Heart, MessageCircle, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { statusFeedback } from "../../utils/statusFeedback";
+import { CloudImage } from "../../components/CloudImage";
 import { Footer } from "../../components/Footer";
  
 export const Favorites = () => {
@@ -52,7 +52,7 @@ export const Favorites = () => {
           },
         );
         setfavoriteListings((prev) => prev.filter((fav) => fav._id !== id));
-        toast.error(response.data.message || "Removed from favorites");
+        statusFeedback.success(response.data.message || "Listing removed from your favorites.");
       } else {
         const response = await axios.post(
           `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
@@ -65,10 +65,10 @@ export const Favorites = () => {
           },
         );
         setfavoriteListings((prev) => [...prev, response.data.data]);
-        toast.success(response.data.message || "Added to favorites");
+        statusFeedback.success(response.data.message || "Listing added to your favorites.");
       }
     } catch {
-      toast.error("Something went wrong, please try again");
+      statusFeedback.error("We couldn’t update your favorites. Please try again.");
     }
   };
  
@@ -113,10 +113,11 @@ export const Favorites = () => {
                     className="bg-white rounded-2xl shadow-md overflow-hidden"
                   >
                     <div className="relative">
-                      <img
+                      <CloudImage
                         src={item.thumbnail}
                         alt="listing"
-                        className="h-48 w-full object-cover"
+                        className="h-48 w-full"
+                        loading="lazy"
                       />{" "}
                       <Heart
                         onClick={(e) => {
@@ -147,7 +148,6 @@ export const Favorites = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
