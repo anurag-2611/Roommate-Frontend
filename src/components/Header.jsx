@@ -13,7 +13,7 @@ export const Header = () => {
             alt="RoomMate Logo"
             loading="lazy"
             onError={(e) => {
-              e.target.src = "/fallback.webp";
+              e.target.src = "/fallback-room.jpg";
             }}
           />
         </Link>

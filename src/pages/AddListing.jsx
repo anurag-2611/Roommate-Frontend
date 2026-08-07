@@ -1,5 +1,5 @@
 
-import axios from "axios";
+import { api } from "../Api/client";
 import React, { useState } from "react";
 import { statusFeedback } from "../utils/statusFeedback";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
@@ -108,15 +108,12 @@ export const AddListing = () => {
         });
       }
  
-      const token = localStorage.getItem("accessToken");
- 
-      const response = await axios.post(
-        "https://roommate-backend-1.onrender.com/api/room/add-room",
+      const response = await api.post(
+        "/room/add-room",
         sendData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -417,11 +414,11 @@ export const AddListing = () => {
                         accept="image/*"
                         multiple
                         onChange={(e) => {
-                          const files = Array.from(e.target.files);
+                          const files = Array.from(e.target.files).slice(0, 4);
  
                           setFormData((prev) => ({
                             ...prev,
-                            photos: [...prev.photos, ...files],
+                            photos: files,
                           }));
                         }}
                         className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"
@@ -449,12 +446,11 @@ export const AddListing = () => {
                         accept="video/*"
                         multiple
                         onChange={(e) => {
-                          const file = e.target.files[0];
-                          if (!file) return;
+                          const files = Array.from(e.target.files).slice(0, 4);
  
                           setFormData((prev) => ({
                             ...prev,
-                            videos: [...prev.videos, file],
+                            videos: files,
                           }));
                         }}
                         className="w-full border-2 border-blue-200 rounded-lg px-4 py-2 bg-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition"

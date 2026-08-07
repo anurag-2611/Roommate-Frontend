@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
+import { SOCKET_URL } from "./src/Api/client.js";
 
-export const socket = io("https://roommate-backend-1.onrender.com", {
+export const socket = io(SOCKET_URL, {
   withCredentials: true,
 });

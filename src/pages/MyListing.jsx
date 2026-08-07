@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../Api/client";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import { Listing } from "../components/DashBoard/Listing";
 
@@ -14,17 +14,7 @@ export const MyListing = () => {
         setLoading(true);
         setError("");
 
-        const token = localStorage.getItem("accessToken");
-
-        const response = await axios.get(
-          "https://roommate-backend-1.onrender.com/api/user/my-listings",
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+        const response = await api.get("/user/my-listings");
         setListings(response.data.data);
       } catch {
         setError("Failed to fetch your listings");

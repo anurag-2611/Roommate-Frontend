@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Images } from "../components/Images";
 import { CloudImage } from "../components/CloudImage";
 import { Rooms } from "../components/Rooms";
@@ -10,7 +10,7 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { Home as HomeIcon, Users, MapPin, Search } from "lucide-react";
-import axios from "axios";
+import { api } from "../Api/client";
 
 export const Home = () => {
   const partnerRef = React.useRef(null);
@@ -32,9 +32,7 @@ export const Home = () => {
   const fetchRooms = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(
-        "https://roommate-backend-1.onrender.com/api/room/get-rooms",
-      );
+      const res = await api.get("/room/get-rooms");
 
       setData(res.data.data);
       return res.data.data;
@@ -121,9 +119,11 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextImage, 3000);
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % RoomImg.length);
+    }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [RoomImg.length]);
 
   const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
@@ -411,11 +411,11 @@ export const Home = () => {
               className="w-full sm:w-full md:w-full lg:w-auto min-w-45 border rounded-lg px-4 bg-transparent outline-none py-3"
             >
               <option value="">Type</option>
-              <option>1Rk</option>
-              <option>2Rk</option>
+              <option value="1RK">1RK</option>
+              <option value="2RK">2RK</option>
               <option>1BHK</option>
               <option>2BHK</option>
-              <option>Flat</option>
+              <option value="FLAT">FLAT</option>
             </select>
 
             <div className="w-full lg:flex-1 bg-green-400 flex items-center gap-2 text-white px-4 sm:px-6 py-3 rounded-full">
@@ -452,15 +452,15 @@ export const Home = () => {
 
         {/* Listings Grid */}
         {Loading ? (
-          <div class="flex justify-center items-center ">
-            <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex justify-center items-center">
+            <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
           <div
             ref={SearchItems}
             className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
           >
-            {FilteredData.length > 0 && FilteredData.length < 6 ? (
+            {FilteredData.length > 0 ? (
               FilteredData.map((item) => (
                 <div
                   key={item._id}

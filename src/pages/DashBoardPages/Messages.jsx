@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../../Api/client";
 import { statusFeedback } from "../../utils/statusFeedback";
 import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
@@ -15,17 +15,7 @@ export const Messages = () => {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("accessToken");
-
-      const response = await axios.get(
-        "https://roommate-backend-1.onrender.com/api/friend/my-friends-data",
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await api.get("/friend/my-friends-data");
 
       if (response.data && response.data.data && response.data.data.friends) {
         setFriends(response.data.data.friends);
@@ -47,17 +37,7 @@ export const Messages = () => {
     try {
       setRemoveLoading(friendId);
 
-      const token = localStorage.getItem("accessToken");
-
-      await axios.delete(
-        `https://roommate-backend-1.onrender.com/api/friend/remove-friend/${friendId}`,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await api.delete(`/friend/remove-friend/${friendId}`);
 
       setFriends((prev) => prev.filter((friend) => friend._id !== friendId));
 

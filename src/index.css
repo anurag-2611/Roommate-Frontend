@@ -4,6 +4,8 @@
 
 body {
   font-family: "Poppins", "Roboto", sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
 }
 /* .btn-grad {
   background-image: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);

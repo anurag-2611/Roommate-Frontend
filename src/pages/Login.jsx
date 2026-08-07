@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { AuthContext } from "../context/AnthContext";
+import { AuthContext } from "../context/AuthContext";
 import { StatusMessage } from "../components/StatusMessage";
 import { getApiError, getSuccessStatus } from "../utils/apiError";
 
@@ -23,8 +23,7 @@ export const Login = () => {
     try {
       setLoading(true);
       setStatus(null);
-      const response = await login({ email: data.email, password: data.password });
-      localStorage.setItem("accessToken", response.data.accessToken);
+      await login({ email: data.email, password: data.password });
       setStatus(getSuccessStatus("You’re signed in. Taking you to your dashboard…"));
       reset();
       setTimeout(() => navigate("/dashboard"), 1200);

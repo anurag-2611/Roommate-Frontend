@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import { api } from "../Api/client";
 import { Footer } from "../components/Footer";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import gsap from "gsap";
@@ -118,9 +118,7 @@ export const RoomDetails = () => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const res = await axios.get(
-          `https://roommate-backend-1.onrender.com/api/room/rooms/${id}`,
-        );
+        const res = await api.get(`/room/rooms/${id}`);
         setRoom(res.data.data);
       } catch {
         /* ignore room details fetch error */

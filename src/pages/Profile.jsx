@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { Navigate, useNavigate } from "react-router-dom";
 import RoomMatelogo from "../assets/RoomMate logo.png";
-import axios from "axios";
+import { api } from "../Api/client";
 import { statusFeedback } from "../utils/statusFeedback";
 
 export const Profile = () => {
@@ -14,16 +14,7 @@ export const Profile = () => {
 
   const sendFriendRequest = async (profileId) => {
     try {
-      const response = await axios.post(
-        `https://roommate-backend-1.onrender.com/api/friend/send-request/${profileId}`,
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await api.post(`/friend/send-request/${profileId}`);
 
       statusFeedback.success(response.data.message || "Your roommate request has been sent.");
     } catch (error) {
@@ -167,7 +158,7 @@ export const Profile = () => {
                 className="w-full h-full object-cover"
                 loading="lazy"
                 onError={(e) => {
-                  e.target.src = "/fallback.webp";
+                  e.target.src = "/fallback-room.jpg";
                 }}
               />
             </div>

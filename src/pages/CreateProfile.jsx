@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+import { api } from "../Api/client";
 import { statusFeedback } from "../utils/statusFeedback";
 
 export const CreateProfile = () => {
@@ -90,15 +90,14 @@ export const CreateProfile = () => {
         formDataToSend.append("avatar", image);
       }
 
-      const response = await axios.post(
-        "https://roommate-backend-1.onrender.com/api/user/userprofile",
+      const response = await api.post(
+        "/user/userprofile",
         formDataToSend,
         {
-          withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
       showSuccessToast(response?.data?.message);
@@ -161,7 +160,7 @@ export const CreateProfile = () => {
                 className="w-full h-full object-cover"
                 loading="lazy"
                 onError={(e) => {
-                  e.currentTarget.src = "/fallback.webp";
+                  e.currentTarget.src = "/fallback-room.jpg";
                 }}
               />
             ) : (

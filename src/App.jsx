@@ -25,7 +25,7 @@ import { AppStatus } from "./components/AppStatus";
 
 export const App = () => {
   return (
-    <div className="bg w-full h-full text-white flex  items-start">
+    <div className="bg min-h-screen w-full text-white flex items-start">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

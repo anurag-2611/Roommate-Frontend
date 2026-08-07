@@ -1,7 +1,7 @@
 import RoomMatelogo from "../../assets/RoomMate logo.png";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AnthContext";
+import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export const DashBoardHeader = () => {
@@ -26,7 +26,7 @@ export const DashBoardHeader = () => {
             alt=""
             loading="lazy"
             onError={(e) => {
-              e.target.src = "/fallback.webp";
+              e.target.src = "/fallback-room.jpg";
             }}
           />{" "}
         </div>

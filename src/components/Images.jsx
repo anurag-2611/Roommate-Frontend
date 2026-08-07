@@ -81,7 +81,7 @@ export const Images = () => {
         className="w-full h-auto rounded-[28px] shadow-2xl object-cover"
         loading="lazy"
         onError={(e) => {
-          e.target.src = "/fallback.webp";
+          e.target.src = "/fallback-room.jpg";
         }}
       />
     </div>

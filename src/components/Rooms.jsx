@@ -1,4 +1,4 @@
-import axios from "axios";
+import { api } from "../Api/client";
 import React, { useEffect, useState } from "react";
 import { CloudImage } from "./CloudImage";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +15,7 @@ export const Rooms = () => {
       try {
         setLoading(true);
 
-        const response = await axios.get(
-          "https://roommate-backend-1.onrender.com/api/room/get-rooms",
-        );
+        const response = await api.get("/room/get-rooms");
 
         setData(response.data.data);
       } catch {

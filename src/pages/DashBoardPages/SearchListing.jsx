@@ -4,15 +4,13 @@ import { Heart, Search, MessageCircle, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { api } from "../../Api/client";
 import { statusFeedback } from "../../utils/statusFeedback";
 import { CloudImage } from "../../components/CloudImage";
 
 import { Footer } from "../../components/Footer";
 
 export const SearchListing = () => {
-  const token = localStorage.getItem("accessToken");
-
   const [data, setData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
   const [City, setCity] = useState("");
@@ -27,9 +25,7 @@ export const SearchListing = () => {
     const FeatchedRoom = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          "https://roommate-backend-1.onrender.com/api/room/get-rooms",
-        );
+        const res = await api.get("/room/get-rooms");
 
         setData(res.data.data);
         setFilteredData(res.data.data);
@@ -46,15 +42,7 @@ export const SearchListing = () => {
   useEffect(() => {
     const getFavorites = async () => {
       try {
-        const res = await axios.get(
-          "https://roommate-backend-1.onrender.com/api/user/get-favorites",
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+        const res = await api.get("/user/get-favorites");
         setFavorites(res.data.data.favorites);
       } catch {
         /* ignore favorites load error */
@@ -97,28 +85,11 @@ export const SearchListing = () => {
 const toggleFavorite = async (id) => {
   try {
     if (Favorites.includes(id)) {
-      const response = await axios.delete(
-        `https://roommate-backend-1.onrender.com/api/user/remove-favorite/${id}`,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await api.delete(`/user/remove-favorite/${id}`);
       setFavorites(Favorites.filter((fav) => fav !== id));
       statusFeedback.success(response.data.message || "Listing removed from your favorites.");
     } else {
-      const response = await axios.post(
-        `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await api.post(`/user/add-favorite/${id}`);
       setFavorites([...Favorites, id]);
       statusFeedback.success(response.data.message || "Listing added to your favorites.");
     }

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { api } from "../../Api/client";
 import { useState, useEffect } from "react";
 import { Heart, MessageCircle, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -19,15 +19,7 @@ export const Favorites = () => {
       try {
         if (!token) return;
  
-        const res = await axios.get(
-          "https://roommate-backend-1.onrender.com/api/user/favorites",
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+        const res = await api.get("/user/favorites");
         setfavoriteListings(res.data.data.favorites);
       } catch {
         /* ignore favorites fetch error */
@@ -35,35 +27,18 @@ export const Favorites = () => {
     };
  
     getFavorites();
-  }, []);
+  }, [token]);
  
   const toggleFavorite = async (id) => {
     try {
       const isFavorite = favoriteListings.some((item) => item._id === id);
  
       if (isFavorite) {
-        const response = await axios.delete(
-          `https://roommate-backend-1.onrender.com/api/user/remove-favorite/${id}`,
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+        const response = await api.delete(`/user/remove-favorite/${id}`);
         setfavoriteListings((prev) => prev.filter((fav) => fav._id !== id));
         statusFeedback.success(response.data.message || "Listing removed from your favorites.");
       } else {
-        const response = await axios.post(
-          `https://roommate-backend-1.onrender.com/api/user/add-favorite/${id}`,
-          {},
-          {
-            withCredentials: true,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+        const response = await api.post(`/user/add-favorite/${id}`);
         setfavoriteListings((prev) => [...prev, response.data.data]);
         statusFeedback.success(response.data.message || "Listing added to your favorites.");
       }

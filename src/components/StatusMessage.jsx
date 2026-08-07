@@ -11,8 +11,8 @@ export const StatusMessage = ({ status, className = "" }) => {
       aria-live="polite"
       className={`mb-5 flex items-start gap-3 rounded-xl border px-4 py-3 text-sm shadow-sm ${
         isError
-          ? "border-red-200 bg-red-50 text-red-800"
-          : "border-emerald-200 bg-emerald-50 text-emerald-800"
+          ? "border-red-200 bg-red-100 text-red-800"
+          : "border-emerald-200 bg-emerald-100 text-emerald-800"
       } ${className}`}
     >
       {isError ? (

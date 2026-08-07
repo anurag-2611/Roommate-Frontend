@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import axios from "axios";
+import { api } from "../Api/client";
 import { useLocation, useParams } from "react-router-dom";
 import { socket } from "../../socket.js";
-import { AuthContext } from "../context/AnthContext.jsx";
+import { AuthContext } from "../context/AuthContext";
 
 export const ConversationPage = () => {
   const { friendId } = useParams();
@@ -20,17 +20,7 @@ export const ConversationPage = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const token = localStorage.getItem("accessToken");
-
-        const response = await axios.get(
-          `https://roommate-backend-1.onrender.com/api/message/${friendId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            withCredentials: true,
-          },
-        );
+        const response = await api.get(`/message/${friendId}`);
 
         setMessages(response.data.messages || []);
       } catch {
@@ -72,19 +62,11 @@ export const ConversationPage = () => {
     if (!message.trim()) return;
 
     try {
-      const token = localStorage.getItem("accessToken");
-
-      const response = await axios.post(
-        "https://roommate-backend-1.onrender.com/api/message/send",
+      const response = await api.post(
+        "/message/send",
         {
           receiverId: friendId,
           text: message,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
         },
       );
 

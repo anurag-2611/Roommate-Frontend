@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { api } from "../../Api/client";
 import { statusFeedback } from "../../utils/statusFeedback";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
 
@@ -11,17 +11,7 @@ export const RoommateRequest = () => {
   const fetchFriendData = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("accessToken");
-
-      const response = await axios.get(
-        "https://roommate-backend-1.onrender.com/api/friend/my-friends-data",
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const response = await api.get("/friend/my-friends-data");
 
       setFriends(response.data?.data?.friends || []);
       setReceivedRequests(response.data?.data?.receivedRequests || []);
@@ -40,17 +30,8 @@ export const RoommateRequest = () => {
 
   const acceptRequest = async (senderProfileId) => {
     try {
-      const token = localStorage.getItem("accessToken");
-
-      const response = await axios.post(
-        `https://roommate-backend-1.onrender.com/api/friend/accept-request/${senderProfileId}`,
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+      const response = await api.post(
+        `/friend/accept-request/${senderProfileId}`,
       );
 
       statusFeedback.success(response.data.message || "Roommate request accepted.");
@@ -62,17 +43,8 @@ export const RoommateRequest = () => {
 
   const rejectRequest = async (senderProfileId) => {
     try {
-      const token = localStorage.getItem("accessToken");
-
-      const response = await axios.post(
-        `https://roommate-backend-1.onrender.com/api/friend/reject-request/${senderProfileId}`,
-        {},
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+      const response = await api.post(
+        `/friend/reject-request/${senderProfileId}`,
       );
 
       statusFeedback.success(response.data.message || "Roommate request rejected.");
