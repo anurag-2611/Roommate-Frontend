@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../Api/client";
 import { statusFeedback } from "../../utils/statusFeedback";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
+import { LoadingState } from "../../components/LoadingState";
 
 export const RoommateRequest = () => {
   const [receivedRequests, setReceivedRequests] = useState([]);
@@ -59,13 +60,7 @@ export const RoommateRequest = () => {
       <div className="w-full min-h-screen bg-linear-to-r from-[#92b6d8ce] to-[#bed7f0] px-4 py-6 sm:px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <DashBoardHeader />
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="bg-white/60 backdrop-blur-lg border border-white/20 rounded-2xl px-6 py-5 shadow-lg text-center">
-              <p className="text-base sm:text-lg font-medium text-gray-700">
-                Loading requests...
-              </p>
-            </div>
-          </div>
+          <LoadingState message="Loading roommate requests" description="Checking your latest connection requests…" />
         </div>
       </div>
     );

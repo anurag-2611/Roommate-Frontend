@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import RoomMatelogo from "../assets/RoomMate logo.png";
 import { api } from "../Api/client";
 import { statusFeedback } from "../utils/statusFeedback";
+import { LoadingState } from "../components/LoadingState";
 
 export const Profile = () => {
   const token = localStorage.getItem("accessToken");
@@ -27,15 +28,7 @@ export const Profile = () => {
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center w-full h-screen m-auto bg-gray-200">
-        <div className="w-14 h-14 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <h2 className="text-xl font-semibold text-gray-800">Loading Profile</h2>
-        <p className="text-gray-500 text-sm mt-1">
-          Please wait while we fetch your data...
-        </p>
-      </div>
-    );
+    return <LoadingState fullScreen message="Loading your profile" description="Getting your RoomMate details ready…" className="bg-slate-100" />;
   }
 
   if (!profile) {

@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import { CloudImage } from "../components/CloudImage";
 import gsap from "gsap";
+import { LoadingState } from "../components/LoadingState";
 
 export const RoomDetails = () => {
   const { id } = useParams();
@@ -133,8 +134,8 @@ export const RoomDetails = () => {
     return (
       <div className="w-full min-h-screen bg-[#f7f5f0]">
         <DashBoardHeader />
-        <div className="pt-28 text-center text-lg text-gray-700">
-          Loading...
+        <div className="pt-16">
+          <LoadingState message="Loading room details" description="Preparing photos, rent, and property information…" />
         </div>
       </div>
     );

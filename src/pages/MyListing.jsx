@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../Api/client";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
 import { Listing } from "../components/DashBoard/Listing";
+import { LoadingState } from "../components/LoadingState";
 
 export const MyListing = () => {
   const [listings, setListings] = useState([]);
@@ -36,9 +37,7 @@ export const MyListing = () => {
         </h1> */}
 
         {loading && (
-          <div className="text-center text-gray-600 text-lg">
-            Loading your listings...
-          </div>
+          <LoadingState message="Loading your listings" description="Collecting the homes you have shared…" />
         )}
 
         {error && (

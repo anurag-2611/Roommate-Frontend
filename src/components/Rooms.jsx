@@ -2,6 +2,7 @@ import { api } from "../Api/client";
 import React, { useEffect, useState } from "react";
 import { CloudImage } from "./CloudImage";
 import { useNavigate } from "react-router-dom";
+import { LoadingState } from "./LoadingState";
 
 export const Rooms = () => {
   const [data, setData] = useState([]);
@@ -29,14 +30,7 @@ export const Rooms = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="w-full flex flex-col justify-center items-center py-16">
-        <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-        <p className="mt-4 text-lg font-medium text-gray-600">
-          Loading rooms...
-        </p>
-      </div>
-    );
+    return <LoadingState message="Loading rooms" description="Bringing the latest listings to you…" />;
   }
 
   if (error) {

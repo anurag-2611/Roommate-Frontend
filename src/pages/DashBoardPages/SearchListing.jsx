@@ -9,6 +9,7 @@ import { statusFeedback } from "../../utils/statusFeedback";
 import { CloudImage } from "../../components/CloudImage";
 
 import { Footer } from "../../components/Footer";
+import { LoadingState } from "../../components/LoadingState";
 
 export const SearchListing = () => {
   const [data, setData] = useState([]);
@@ -196,9 +197,7 @@ const toggleFavorite = async (id) => {
 
             {/* Listings Grid */}
             {Loading ? (
-              <p className="text-lg font-medium text-center py-10">
-                Loading....
-              </p>
+              <LoadingState message="Searching listings" description="Looking for spaces that fit your preferences…" />
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                 {FilteredData.length > 0 ? (

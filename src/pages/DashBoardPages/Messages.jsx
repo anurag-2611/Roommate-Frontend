@@ -3,6 +3,7 @@ import { api } from "../../Api/client";
 import { statusFeedback } from "../../utils/statusFeedback";
 import { useNavigate } from "react-router-dom";
 import { DashBoardHeader } from "../../components/DashBoard/DashBoardHeader";
+import { LoadingState } from "../../components/LoadingState";
 
 export const Messages = () => {
   const [friends, setFriends] = useState([]);
@@ -55,11 +56,7 @@ export const Messages = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="w-full min-h-screen p-4 flex items-center justify-center">
-        <p className="text-lg font-medium text-gray-700">Loading friends...</p>
-      </div>
-    );
+    return <LoadingState fullScreen message="Loading your connections" description="Finding your RoomMate conversations…" />;
   }
 
   return (
