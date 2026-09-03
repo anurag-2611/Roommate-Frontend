@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { api } from "../Api/client";
 import { Footer } from "../components/Footer";
 import { DashBoardHeader } from "../components/DashBoard/DashBoardHeader";
+import { CloudImage } from "../components/CloudImage";
 import gsap from "gsap";
 
 export const RoomDetails = () => {
@@ -150,10 +151,12 @@ export const RoomDetails = () => {
             ref={heroRef}
             className="lg:col-span-2 h-65 sm:h-90 lg:h-125 rounded-2xl overflow-hidden bg-white shadow-sm"
           >
-            <img
+            <CloudImage
               src={mainImage}
               alt={room.title}
-              className="w-full h-full object-contain"
+              className="h-full w-full"
+              imageClassName="object-contain"
+              loading="eager"
             />
           </div>
         </div>
@@ -315,10 +318,11 @@ export const RoomDetails = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           <div className="h-64 rounded-2xl overflow-hidden bg-white shadow-sm">
-            <img
+            <CloudImage
               src={room?.photos?.[0]}
               alt="room"
-              className="w-full h-full object-cover"
+              className="h-full w-full"
+              loading="lazy"
             />
           </div>
         </div>

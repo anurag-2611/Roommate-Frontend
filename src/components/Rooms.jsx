@@ -70,9 +70,6 @@ export const Rooms = () => {
                 alt={room.title}
                 loading="lazy"
                 className="w-full h-full"
-                onError={(e) => {
-                  e.target.src = "/fallback-room.jpg";
-                }}
               />
             </div>
 

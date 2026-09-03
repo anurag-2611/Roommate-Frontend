@@ -13,12 +13,20 @@ const ImageContent = ({
   const imageSource = failed ? fallback : src;
 
   return (
-    <div className={`relative overflow-hidden bg-slate-200 ${className}`}>
+    <div
+      className={`relative overflow-hidden bg-slate-100 ${className}`}
+      aria-busy={!loaded}
+    >
       {!loaded && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 animate-pulse bg-linear-to-r from-slate-200 via-slate-100 to-slate-200"
-        />
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-linear-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse">
+          <span
+            aria-hidden="true"
+            className="h-8 w-8 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600"
+          />
+          <span className="text-xs font-medium text-slate-500">
+            Loading room image...
+          </span>
+        </div>
       )}
       <img
         {...props}
