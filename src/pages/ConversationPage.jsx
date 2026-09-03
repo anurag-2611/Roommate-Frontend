@@ -36,7 +36,12 @@ export const ConversationPage = () => {
   useEffect(() => {
     if (!currentUser?._id) return;
 
+    socket.connect();
     socket.emit("join", currentUser._id);
+
+    return () => {
+      socket.disconnect();
+    };
   }, [currentUser]);
 
   useEffect(() => {
